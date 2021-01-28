@@ -105,6 +105,7 @@ class DiaryFrame(Frame):
 
 		cal = Calendar(self, firstweekday="sunday", showweeknumbers=False, borderwidth=0, date_pattern="yyyy-mm-dd")
 		cal.pack(padx=20, pady=10)
+		buttonbg = ImageTk.PhotoImage(Image.open("assets/create.png").resize((30, 30), Image.ANTIALIAS))
 		print_btn = Button(self, cursor="dotbox", text="Check Entries for the selected date", image=buttonbg, bd=0, command=lambda: self.check_records(cal.get_date()))
 		print_btn.pack(padx=15, pady=15)
 
