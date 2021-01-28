@@ -87,7 +87,7 @@ class DiaryFrame(Frame):
 		self.controller = controller
 		self.parent = parent
 
-		global back_img, create_img
+		global back_img, create_img, buttonbg
 
 		back_img = ImageTk.PhotoImage(Image.open("assets/back.png"))
 		back_btn = Button(self, text="Back to Menu", image=back_img, anchor="center", compound="left", bd=0, padx=-10, command=lambda: controller.show_frame("Homescreen"))
@@ -105,8 +105,8 @@ class DiaryFrame(Frame):
 
 		cal = Calendar(self, firstweekday="sunday", showweeknumbers=False, borderwidth=0, date_pattern="yyyy-mm-dd")
 		cal.pack(padx=20, pady=10)
-		print_btn = Button(self, text="Check Entries for the selected date", bd=0, command=lambda: self.check_records(cal.get_date()))
-		print_btn.pack(padx=10, pady=10)
+		print_btn = Button(self, cursor="dotbox", text="Check Entries for the selected date", image=buttonbg, bd=0, command=lambda: self.check_records(cal.get_date()))
+		print_btn.pack(padx=15, pady=15)
 
 	def check_records(self, date):
 		global entries
@@ -439,7 +439,7 @@ class TaskEditFrame(Frame):
 
 		global delete_icon, completed_icon, incomplete_icon
 		delete_icon = ImageTk.PhotoImage(Image.open("assets/delete.png").resize((20, 20), Image.ANTIALIAS))
-		completed_icon = ImageTk.PhotoImage(Image.open("assets/completed.png").resize((20, 20), Image.ANTIALIAS))	
+		completed_icon = ImageTk.PhotoImage(Image.open("assets/completed.png").resize((20, 20), Image.ANTIALIAS))
 		incomplete_icon = ImageTk.PhotoImage(Image.open("assets/incomplete.png").resize((20, 20), Image.ANTIALIAS))
 
 		back_btn = Button(self, text="Back", image=back_img, anchor="center", compound="left", bd=0, padx=-10, command=lambda: self.load_todo_frame())
@@ -463,7 +463,7 @@ class TaskEditFrame(Frame):
 		priority_levels = {1: "Important & Urgent", 2: "Important but not Urgent", 3: "Urgent but not Important", 4: "Neither Important nor Urgent"}
 		self.title_label.config(text=f"Title: {title}")
 		self.description_label.config(text=f"Description: {description or 'No Description Given'}")
-		self.priority_label.config(text=f"Priority Level: {priority}. {priority_levels[priority]}")	
+		self.priority_label.config(text=f"Priority Level: {priority}. {priority_levels[priority]}")
 
 		if status == 0:  # if task is incomplete
 			self.change_status_btn.config(text="Mark as Completed", image=completed_icon, compound="left", command=lambda: self.change_item_status(task, 1))
